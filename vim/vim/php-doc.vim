@@ -77,7 +77,7 @@ let g:pdv_cfg_License = "LGPL {@link http://www.gnu.org/copyleft/lesser.html}"
 " add by panrui
 let g:pdv_cfg_Time = strftime("%Y-%m-%d %H:%M:%S") 
 let g:pdv_cfg_Report = ""
-let g:pdv_cfg_Author = "潘瑞 (panrui@discuz.com)"
+let g:pdv_cfg_Author = "温达明 (wendaming@comsenz.com)"
 
 " TOB: let g:pdv_cfg_Type = "mixed"
 " TOB: let g:pdv_cfg_Package = ""
