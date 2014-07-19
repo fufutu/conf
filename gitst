@@ -1,0 +1,34 @@
+#/bin/bash
+
+if [ "$1" = "github" ];then
+	if [ -e ".git_github" ]
+	then
+		mv .git .git_baidu
+		mv .gitignore .gitignore_baidu
+		mv .git_github .git
+		mv .gitignore_github .gitignore
+		echo "now is github env"
+	else
+		echo "now is github env"
+	fi
+elif [ "$1" = "baidu" ];then
+	if [ -e ".git_baidu" ]
+	then
+		mv .git .git_github
+		mv .gitignore .gitignore_github
+		mv .git_baidu .git
+		mv .gitignore_baidu .gitignore
+		echo "now is baidu env"
+	else
+		echo "now is baidu env"
+	fi
+else
+	if [ -e ".git_baidu" ]
+	then
+		echo "now is github env"
+	else
+		echo "now is baidu env"
+	fi
+fi
+
+exit 0
