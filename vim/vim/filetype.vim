@@ -10,7 +10,4 @@ augroup filetypedetect
 	au BufRead,BufNewFile *.phps setfiletype php
 	au BufRead,BufNewFile *.module setfiletype php
 
-	" Detect .proto as 'protobuf'
-	au BufNewFile,BufRead *.proto setfiletype proto
-
 augroup END
