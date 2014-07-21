@@ -101,3 +101,17 @@ nmap <silent> <F4>
 set tags=./tags,tags
 
 " vim: set fdm=marker:
+"
+" php diction
+set dictionary-=/home/wendaming/.vim/dict/php.dict dictionary+=/home/wendaming/.vim/dict/php.dict
+set complete-=k complete+=k
+
+" auto complete match
+inoremap  <buffer>  {<CR>    {<CR>}<Esc>O
+"inoremap  <buffer>  (<Space>   ()<Esc>F(a
+"inoremap  <buffer>  "<Space>   ""<Esc>F"a
+"inoremap  <buffer>  '<Space>   ''<Esc>F'a
+"inoremap  <buffer>  [<Space>   []<Esc>F[a
+
+" use space instead of tab
+set expandtab
