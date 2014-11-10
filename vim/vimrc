@@ -8,6 +8,7 @@ filetype indent on
 
 " Turn syntax highlighting on
 syntax on
+set nofoldenable    " disable folding
 
 "
 " GLOBAL SETTINGS
