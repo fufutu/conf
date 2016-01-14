@@ -8,7 +8,7 @@ filetype indent on
 
 " Turn syntax highlighting on
 syntax on
-set nofoldenable    " disable folding
+set nofoldenable
 
 "
 " GLOBAL SETTINGS
@@ -109,47 +109,6 @@ let loaded_matchparen = 1
 " netRW: Open files in a split window
 let g:netrw_browse_split = 1
 
-"
-" MAPPINGS
-"
-
-" save changes
-map ,w :w<CR>
-" exit vim without saving any changes
-map ,q :q!<CR>
-" exit vim saving changes
-map ,x :x<CR>
-" switch to upper/lower window quickly
-map <C-J> <C-W>j
-map <C-K> <C-W>k
-" use CTRL-F for omni completion
-imap <C-F> 
-" map ,f to display all lines with keyword under cursor and ask which one to
-" jump to
-nmap ,f [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
-" use <F6> to toggle line numbers
-nmap <silent> <F6> :set number!<CR>
-" page down with <Space>
-"nmap <Space> <PageDown>
-" open filename under cursor in a new window (use current file's working
-" directory) 
-nmap gf :new %:p:h/<cfile><CR>
-" map <Alt-p> and <Alt-P> to paste below/above and reformat
-nnoremap <Esc>P  P'[v']=
-nnoremap <Esc>p  p'[v']=
-" visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv 
-
-" map cc cx comlents //
-map cc v:s/^/\/\//g<CR>
-map cx v:s/^\/\///g<CR>
-
-" map cc cx comments //
-vmap cc :s/^/\/\//g<CR>
-vmap cx :s/^\/\///g<CR>
-
-
 " Generic highlight changes
 highlight Comment cterm=none ctermfg=Gray
 highlight IncSearch cterm=none ctermfg=Black ctermbg=DarkYellow
@@ -191,36 +150,10 @@ nmap <silent> <F12> :set list!<CR>
 set list
 set lcs=tab:>-,trail:-
 
-"" del space 
-" map ds delete space
-nmap <silent> <F9> :%s/\s\+$//g<CR>
-"map  ds v:%s/\s\+$//g<CR>
-"vmap ds  :%s/\s\+$//g<CR>
-"
-"
-"
-"map cp :w<CR>:!cp % /tmp/% <CR><CR>
-map cp :w<CR>:!insmeishi % <CR><CR>
-map cs :w<CR>:!inscss <CR><CR>
-map ml :w<CR>:!insmyql % <CR><CR>
-map pp :w<CR>:!php -l % <CR>
-map pr :w<CR>:!php % <CR>
-map pu :w<CR>:!phpunit % <CR>
-map ms8 :w<CR>:!upload -t ms218 % <CR><CR>
-map ms9 :w<CR>:!upload -t ms219 % <CR><CR>
-map mst :w<CR>:!upload -t ms221 % <CR><CR>
-map ms1 :w<CR>:!upload -t msdev1 % <CR><CR>
-map ms2 :w<CR>:!upload -t msdev2 % <CR><CR>
-map ms3 :w<CR>:!upload -t msdev3 % <CR><CR>
-map ms4 :w<CR>:!upload -t msdev4 % <CR><CR>
-map ms5 :w<CR>:!upload -t msdev5 % <CR><CR>
 
 " set color schema
 " colorscheme bluegreen
-" colorscheme torte
-
-map dc :r! date +\%Y年\%m月\%d日\ \%H:\%M:\%S <CR>
-
+"
 " use space instead of tab
 "set expandtab
 
@@ -239,3 +172,26 @@ map <C-F> :BufSurfForward<CR>
 " zencoding
 let g:user_zen_expandabbr_key = '<c-y>'
 let g:use_zen_complete_tag = 1
+
+set mouse=v
+set nobackup
+"set wildignore=*.class,*.rbc,,*.log,*.20*
+
+" Function to do <Tab> or completion, based on context {{{
+function MyTabOrCompletion()
+	let col = col('.')-1
+	if !col || getline('.')[col-1] !~ '\k'
+		return "\<tab>"
+	else
+		return "\<C-N>"
+	endif
+endfunction
+" }}}
+
+"
+" Map CTRL-B to snippetsEmu and use <Tab> for our smart completion
+if exists('loaded_snippet')
+	imap <C-B> <Plug>Jumper
+endif
+inoremap <Tab> <C-R>=MyTabOrCompletion()<CR>
+
